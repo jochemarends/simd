@@ -1,7 +1,7 @@
-add_library(lib STATIC)
+add_library(lib_avx STATIC)
 
-target_sources(lib PRIVATE src/dotf32.S src/addf32.S src/matmulf32.S)
+target_sources(lib_avx PRIVATE src/dotf32.S src/addf32.S src/matmulf32.S)
 
-target_include_directories(lib PUBLIC inc)
+target_include_directories(lib_avx PUBLIC inc)
 
-target_compile_options(lib PRIVATE -Werror -Wall -Wextra -pedantic)
+target_compile_options(lib_avx PRIVATE -Werror -Wall -Wextra -pedantic)
