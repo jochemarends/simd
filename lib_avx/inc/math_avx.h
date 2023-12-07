@@ -22,7 +22,7 @@ namespace avx {
 
     /**
      * Dot Product.
-     * Calculates the dot product for two vector of single-precision floating point numbers.
+     * Calculates the dot product for two vectors of single-precision floating point numbers.
      *
      * @param vec1 The 1st source operand.
      * @param vec2 The 2nd source operand.

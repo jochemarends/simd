@@ -7,4 +7,3 @@ add_subdirectory(lib_avx)
 add_subdirectory(lib_cpp)
 
 add_subdirectory(benchmarks)
-

@@ -4,7 +4,7 @@
  */
 
 #ifndef MATH_CPP_H
-#define MATH_AVX_H
+#define MATH_CPP_H
 
 #include <cstdint>
 
@@ -22,7 +22,7 @@ namespace cpp {
 
     /**
      * Dot Product.
-     * Calculates the dot product for two vector of single-precision floating point numbers.
+     * Calculates the dot product for two vectors of single-precision floating point numbers.
      *
      * @param vec1 The 1st source operand.
      * @param vec2 The 2nd source operand.
