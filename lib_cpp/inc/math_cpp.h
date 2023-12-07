@@ -11,7 +11,7 @@
 namespace cpp {
     /**
      * Vector Addition.
-     * Adds two vectors of single-precisions floating point numbers.
+     * Adds two vectors of single-precision floating point numbers.
      *
      * @param vec1 The 1st source operand.
      * @param vec2 The 2nd source operand.
