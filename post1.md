@@ -10,21 +10,13 @@
 SIMD (Same Instruction Multiple Data) is technique where a CPU performs an operation on multiple operands concurrently. SIMD is widely used in many programming domains such as graphics programming and image processing. 
 
 ### SIMD extensions for the x86 Processors
-The x86 processor architecture has various SIMD extensions. I will only focus on the AVX and AVX2 extensions since they are the more modern ones and widely implemented. AVX instruction can operate on 256-bit wide registers, these are named `ymm0`-`ymm15`. The lower 128-bit
+The x86 processor architecture has various SIMD extensions. I will only focus on the AVX, AVX2, and FMA extensions in this blog post series. AVX instruction can operate on 256-bit wide registers, these are named `ymm0`-`ymm15`. The lower 128-bit of these registers are aliased to `xmm0`-`xmm1`.
 
 ### SIMD Registers
 In addition to the regular registers available on the `x86_64` architecture, processors that implements the AVX extension provide sixteen 256-bit wide registers named `ymm0`-`ymm15`. The lower 128 bits of these registers can be accessed by `xmm0`-`xmm15`. AVX and AVX2 can operate on both packed and scalar dat with packed data.
 
-* Introduction to SIMD
-* SIMD for x86 processors
-* Registers and data types
-* Basic instructions
-* Example funcition
-
-SIMD has many applications in real live such as image processing and in games  
-If we want to add two 
-
 ## Moving Data
+Most AVX instructions operate on scalar or packed data. A single-precision floating point number can be moved using the `vmovss` instruciton. A double-precision floating point instruction can be moved around using the `vmovsd` instruction.
 
 Suppose we want to perform addition between two arrays of single-precision floating point numbers. We can write a function that makes use of SIMD instruction in order to speed up this operation.
 ```cpp
@@ -57,6 +49,8 @@ scalar_test:
     jnz     scalar_loop
     ret
 ```
-The first instruction of this procedure makes sure that the contents of the `rax` register is zero. This is because `rax` will be used for indexing. After that the program will jump to the `packed_test` label where will be checked whether the source operands contain eight more elements. If this is the case, a packed addition will be performed. Else, the scalar
+The first instruction of this procedure makes sure that the contents of the `rax` register is zero. This is because `rax` will be used for indexing. After that the program will jump to the `packed_test` label where will be checked whether the source operands contain eight more elements. If this is the case, a packed addition will be performed. Else, the scalar.
+
+###
 
 ### Masking
