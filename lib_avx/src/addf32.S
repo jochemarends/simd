@@ -5,7 +5,6 @@
 mask:
 .fill 8, 4, 0x00000000
 .fill 8, 4, 0x80000000
-
 .text
 _addf32:
     movq    %rdx, %r8
