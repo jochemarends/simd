@@ -6,7 +6,7 @@ mask:
 .fill 8, 4, 0x00000000
 .fill 8, 4, 0x80000000
 .text
-_addf32:
+addf32:
     movq    %rdx, %r8
     andq    $7, %r8
     leaq    mask(%rip), %rax
@@ -27,7 +27,7 @@ adone:
     vzeroupper
     ret
 
-addf32:
+_addf32:
     jmp     scalar_test
 scalar_loop:
     vmovss  -4(%rdi, %rdx, 4), %xmm0
@@ -44,7 +44,6 @@ float8_loop:
     vaddps  -32(%rsi, %rdx, 4), %ymm0, %ymm1
     vmovups %ymm1, -32(%rcx, %rdx, 4)
     subq    $8, %rdx
-    testq   %rdx, %rdx
     jnz     float8_loop
 done:
     vzeroupper

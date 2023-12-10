@@ -1,10 +1,10 @@
 /**
- * @file math_avx.h
+ * @file lib_avx.h
  * @author Jochem Arends
  */
 
-#ifndef MATH_AVX_H
-#define MATH_AVX_H
+#ifndef LIB_AVX_H
+#define LIB_AVX_H
 
 #include <cstdint>
 
@@ -29,6 +29,14 @@ namespace avx {
      * @param len The amount of element each vector holds.
      */
     extern "C" float dotf32(const float* vec1, const float* vec2, std::uint64_t len);
+
+    /** To Upper.
+     * Converts a sequence of ASCII characters to upper case.
+     *
+     * @param str A pointer to the sequence of characters to convert.
+     * @param len The length of the sequence.
+     */
+     extern "C" void to_upper(char* str, std::uint64_t len);
 }
 
 #endif

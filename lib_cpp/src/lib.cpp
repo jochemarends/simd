@@ -1,4 +1,4 @@
-#include <math_cpp.h>
+#include <lib_cpp.h>
 
 namespace cpp {
     void addf32(const float* vec1, const float* vec2, std::uint64_t len, float* res) {
@@ -14,5 +14,12 @@ namespace cpp {
         }
         return sum;
     }
-}
 
+    void to_upper(char* str, std::uint64_t len) {
+        for (std::uint64_t idx{}; idx < len; ++idx) {
+            if (str[idx] >= 'a' && str[idx] <= 'z') {
+                str[idx] ^= 0x20;
+            }
+        }
+    }
+}

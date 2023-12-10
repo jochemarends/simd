@@ -8,7 +8,9 @@
 Packed floating point data can conditionally be moved around using the `vmaskmovps` and `vmaskmovpd` instructions. They require two source and one destination operand. The instructions copy the data from the second operand to the third operand only if on a mask which is the second operand.
 
 ### Comparing
-Packed floating point data can be compared using the `vcmpps` and `vcmppd` instructions for single and double-precision data respectively. These instructions require four operands. The first operand is an immediate value that indicates the type of comparison which gets performed. The second and third operands are compared against each other and the result gets stored in the fourth operand.
+Packed floating point data can be compared using the `vcmpps` and `vcmppd` instructions for single and double-precision data respectively. These instructions require four operands. The first operand is an immediate value that indicates the type of comparison which gets performed. The second and third operands get compared against each other and the last operand is where the result gets stored in. When the comparison matches for an element the bits for that element in the destination operand gets set to all ones. If the comparison fails all the bits of that element get set to zero.
+
+![vcmpps](./images/vcmpps.png)
 
 | mnemonic | 1st operand | description                                           |
 |----------|-------------|-------------------------------------------------------|

@@ -1,10 +1,10 @@
 ## Introduction to SIMD
 
 ### What is SIMD?
-SIMD (Same Instruction Multiple Data) is technique where a CPU performs an operation on multiple operands concurrently. SIMD can reduce the number of instructions needed to perform a certain task and make algorithms faster. SIMD is widely used in many programming domains such as graphics programming and image processing. 
+SIMD (Same Instruction Multiple Data) is technique where a CPU performs an operation on multiple operands concurrently. SIMD can reduce the number of instructions needed to perform a certain task and improve the speed of certain algorithms. SIMD is widely used in many programming domains such as graphics programming and image processing. 
 
 ### SIMD extensions for the x86 Processors
-The x86 processor architecture has various SIMD extensions. I will only focus on the AVX extensions, AVX2, and FMA extensions in this blog post series. AVX instruction can operate on 256-bit wide registers, these are named `ymm0`-`ymm15`. The lower 128 bits of these registers are aliased to `xmm0`-`xmm1`. One of these registers can hold multiple values of a given types as shown in the image below. This is called packed data.
+The x86 processor architecture has various SIMD extensions. I will only focus on the AVX and AVX2 extensions in this blog post series since those are the most recent ones that my CPU supports. AVX instruction can operate on 256-bit wide registers, these are named `ymm0`-`ymm15`. The lower 128 bits of these registers are aliased to `xmm0`-`xmm1`. One of these registers can hold multiple values of a given types as shown in the image below. This is called packed data.
 
 ![image](./images/datatypes.png)
 
@@ -60,17 +60,33 @@ The `vmovaps` and `vmovapd` instructions can be used to move aligned packed floa
 | `vdivps` | Divide packed single-precision floating-point values.   |
 | `vdivps` | Divide packed double-precision floating-point values.   |
 
-The following code demonstrates how a four component vector can be multiplied by a scalar. The `vbroadcastss` instruction is used to fill 128-bit or 256-bit registers with a single-precision floating-point value. The `.align` directive was used to align `vector` on a 16 byte boundary. 
+The `vbroadcastss` instruction is used to fill 128-bit or 256-bit registers with a single-precision floating-point value. The following code demonstrates how a four component vector can be multiplied by a scalar.  The `.align` directive was used to align `vector` on a 16 byte boundary. The `.fill` directive is used to allocate space for the result. Notice how when loading `vector` into `xmm0` I used `vmovaps` since that label is properly aligned but when storing the result I had used `vmovups` since `result` isn't aligned properly.
 ```asm
 .data
 .align 16
 vector: .float 1.0, 2.0, 3.0, 4.0
 scalar: .float 0.5
-result: .fill 4, 4, ?
+result: .fill 4, 4, 0.0
 .text
 scalef32:
     vmovaps vector(%rip), %xmm0
     vbroadcastss scalar(%rip), %xmm1
     vmulps  %xmm1, %xmm0, %xmm0
     vmovups %xmm0, result(%rip)
+```
+
+### Comparing
+Packed floating point data can be compared using the `vcmpps` and `vcmppd` instructions for single and double-precision data respectively. These instructions require four operands. The first operand is an immediate value that indicates the type of comparison that gets performed. The second and third operands get compared against each other and the last operand is where the result gets stored in. When the comparison evaluates to true for an element in packed data, the bits for that element in the destination operand get all set to one, else those bits will be set to zero. 
+
+### Conditional Loading
+Packed floating point data can conditionally be moved around using the `vmaskmovps` and `vmaskmovpd` instructions. They require two source and one destination operand. The instruction copies an element of packed data only if the most significant bit of that element is set in the second operand. If this bit is not set the bits of that corresponding elements are zeroed out in the destination operand. Suppose we're working with RGBA pixel data, and we only want to perform a certain operation on the RGB channels we can use a mask to only load those channels. However, be aware that this does not preserve the element located at that position but will instead set the corresponding bits to zero.
+```asm
+.data
+.align 32
+rgba: .float  255.0, 120.0, 120.0. 1.0
+mask: .long -1, -1, -1, 0
+.text
+proc:
+    vmovdqu mask(%rip), %xmm0           # load the mask
+    vmaskmovps rgba(%rip), %xmm0, %xmm1 # only loads the rgb channels
 ```

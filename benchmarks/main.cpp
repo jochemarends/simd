@@ -1,8 +1,8 @@
 #include <benchmark/benchmark.h>
 #include <random>
 #include <algorithm>
-#include <math_avx.h>
-#include <math_cpp.h>
+#include <lib_avx.h>
+#include <lib_cpp.h>
 
 struct fixture : public benchmark::Fixture {
 public:
@@ -20,7 +20,7 @@ public:
         std::generate_n(vec3, len, random);
     }
 
-    static constexpr std::uint64_t len{512};
+    static constexpr std::uint64_t len{128};
     float vec1[len];
     float vec2[len];
     float vec3[len];
