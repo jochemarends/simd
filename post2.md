@@ -1,4 +1,31 @@
-## Conditional
+* Masking
+* Comparing
+* Blending
+
+### Conditional Loading
+
+### Masking
+Packed floating point data can conditionally be moved around using the `vmaskmovps` and `vmaskmovpd` instructions. They require two source and one destination operand. The instructions copy the data from the second operand to the third operand only if on a mask which is the second operand.
+
+### Comparing
+Packed floating point data can be compared using the `vcmpps` and `vcmppd` instructions for single and double-precision data respectively. These instructions require four operands. The first operand is an immediate value that indicates the type of comparison which gets performed. The second and third operands are compared against each other and the result gets stored in the fourth operand.
+
+| mnemonic | 1st operand | description                                           |
+|----------|-------------|-------------------------------------------------------|
+| vcmpps   | ymm1        | compare packed single-precision floating point values |
+| vcmppd   |             | compare packed double-precision floating point values |
+
+
+```asm
+.text
+.byte
+to_upper:
+    vcmpps  %
+```
+
+### Blending
+
+
 Suppose we want to perform addition between two arrays of single-precision floating point numbers. We can write a function that makes use of SIMD instruction in order to speed up this operation.
 ```cpp
 extern "C" void addf32(const f32* vec1, const f32* vec2, u64 len; f32* res);
