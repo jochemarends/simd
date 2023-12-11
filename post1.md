@@ -61,6 +61,7 @@ The `vmovaps` and `vmovapd` instructions can be used to move aligned packed floa
 | `vdivps` | Divide packed double-precision floating-point values.   |
 
 The `vbroadcastss` instruction is used to fill 128-bit or 256-bit registers with a single-precision floating-point value. The following code demonstrates how a four component vector can be multiplied by a scalar.  The `.align` directive was used to align `vector` on a 16 byte boundary. The `.fill` directive is used to allocate space for the result. Notice how when loading `vector` into `xmm0` I used `vmovaps` since that label is properly aligned but when storing the result I had used `vmovups` since `result` isn't aligned properly.
+
 ```asm
 .data
 .align 16
@@ -90,3 +91,6 @@ proc:
     vmovdqu mask(%rip), %xmm0           # load the mask
     vmaskmovps rgba(%rip), %xmm0, %xmm1 # only loads the rgb channels
 ```
+
+### References
+For this topic I've used a book called "Modern X86 Assembly Language Programming" by Daniel Kusswurm. I've also used [this](https://www.felixcloutier.com/x86/) website as a reference to the x86 instruction set.

@@ -23,7 +23,7 @@ loop:
     vmovups %ymm1, -32(%rcx, %rdx, 4)
     subq    $8, %rdx
     jnz     loop
-adone:
+done:
     vzeroupper
     ret
 
@@ -45,6 +45,6 @@ float8_loop:
     vmovups %ymm1, -32(%rcx, %rdx, 4)
     subq    $8, %rdx
     jnz     float8_loop
-done:
+_done:
     vzeroupper
     ret
