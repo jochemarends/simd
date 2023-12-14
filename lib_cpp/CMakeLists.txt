@@ -4,4 +4,4 @@ target_sources(lib_cpp PRIVATE src/lib.cpp)
 
 target_include_directories(lib_cpp PUBLIC inc)
 
-target_compile_options(lib_cpp PRIVATE -Werror -Wall -Wextra -pedantic)
+target_compile_options(lib_cpp PRIVATE -Werror -Wall -Wextra -pedantic -O3)

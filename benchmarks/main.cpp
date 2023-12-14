@@ -20,7 +20,7 @@ public:
         std::generate_n(vec3, len, random);
     }
 
-    static constexpr std::uint64_t len{8};
+    static constexpr std::uint64_t len{256};
     float vec1[len];
     float vec2[len];
     float vec3[len];

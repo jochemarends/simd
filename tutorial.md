@@ -1,7 +1,7 @@
 ## Introduction to SIMD
 
 ### What is SIMD?
-SIMD (Same Instruction Multiple Data) is technique where a CPU performs an operation on multiple operands concurrently. SIMD can reduce the number of instructions needed to perform a certain task and improve the speed of certain algorithms. SIMD is widely used in many programming domains such as graphics programming and image processing. 
+SIMD (Same Instruction Multiple Data) is technique where a CPU performs an operation on multiple operands imultaneasly. SIMD can reduce the number of instructions needed to perform a certain task and improve the speed of certain algorithms. SIMD is widely used in many programming domains such as graphics programming and image processing. 
 
 ### SIMD extensions for the x86 Processors
 The x86 processor architecture has various SIMD extensions. I will only focus on the AVX and AVX2 extensions in this blog post series since those are the most recent ones that my CPU supports. AVX instruction can operate on 256-bit wide registers, these are named `ymm0`-`ymm15`. The lower 128 bits of these registers are aliased to `xmm0`-`xmm1`. One of these registers can hold multiple values of a given types as shown in the image below. This is called packed data.
