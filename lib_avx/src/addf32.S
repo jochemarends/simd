@@ -1,6 +1,7 @@
 .globl addf32
 
 .data
+.float 3.3
 .align 32
 mask:
 .fill 8, 4, 0x00000000
