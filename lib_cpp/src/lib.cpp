@@ -14,12 +14,4 @@ namespace cpp {
         }
         return sum;
     }
-
-    void to_upper(char* str, std::uint64_t len) {
-        for (std::uint64_t idx{}; idx < len; ++idx) {
-            if (str[idx] >= 'a' && str[idx] <= 'z') {
-                str[idx] ^= 0x20;
-            }
-        }
-    }
 }
