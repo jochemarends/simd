@@ -29,31 +29,3 @@ loop:
     jnz     loop
 done:
     ret
-
-matmulf32:
-    movq    %rdx, %rcx
-    andq    $3, %rcx
-    leaq    mask(%rip), %rax
-    vmovdqu (%rax, %rcx, 4), %xmm2
-
-    vbroadcastss (%rdi, %r10, 4), %xmm0
-    vmaskmovps (%rcx, %r11, 4), %xmm2, %xmm1
-    vfmadd231ps %xmm1, %xmm0, %xmm0
-
-    vmaskmovps %xmm0, %xmm2, (%rax)
-
-
-matmulf32_row_loop:
-
-matmulf32_col_loop:
-matmulf32_col_test:
-matmulf32_row_test:
-    xorq    %r10, %r10 # reset the row index of mat1
-    xorq    %r11, %r11 # reset the col index of mat2
-    subq    $1, %rsi
-    jnz     matmulf32_row_loop
-
-matmulf32_done:
-
-    subq    $1, %r10
-    jnz      matmulf32_row_loop

@@ -1,6 +1,6 @@
 add_library(lib_avx STATIC)
 
-target_sources(lib_avx PRIVATE src/dotf32.S src/addf32.S src/matmulf32.S)
+target_sources(lib_avx PRIVATE src/dotf32.S src/addf32.S)
 
 target_include_directories(lib_avx PUBLIC inc)
 

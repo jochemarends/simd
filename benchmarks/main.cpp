@@ -4,8 +4,7 @@
 #include <lib_avx.h>
 #include <lib_cpp.h>
 
-struct fixture : public benchmark::Fixture {
-public:
+struct fixture : benchmark::Fixture {
     void SetUp(const ::benchmark::State& state) override {
         std::random_device device{};
         std::mt19937 engine{device()};
