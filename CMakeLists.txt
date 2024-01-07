@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.22)
 
-project(simd CXX ASM)
+project(simd LANGUAGES CXX ASM)
 
 add_subdirectory(lib_avx)
 
